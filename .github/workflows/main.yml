@@ -27,22 +27,9 @@ jobs:
         set PATH=%PATH%;%GITHUB_WORKSPACE%\Qt\5.12.12\msvc2017_64\bin
         cmd.exe /c build-libffi.bat
         cmd.exe /c build-ultimate-x64.bat
-
-    - name: Create Release and Upload Release Asset
-      uses: softprops/action-gh-release@v2
-      if: startsWith(github.ref, 'refs/tags/')
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        tag_name: ${{ github.ref }}
-        name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-        files: |
-          vmp-3.5.1.zip
-          LICENSE
  
     - name: Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v1
       with:
           name: vmp-3.5.1
           path: bin
